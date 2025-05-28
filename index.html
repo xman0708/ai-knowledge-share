@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI 知识库平台 分享交流</title>
+  <title>AI 知识库平台 橙信交流会</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -61,30 +61,26 @@
       '提示词工程与优化技巧',
       '金融行业RAG应用案例',
       '金融知识库数据来源',
-      '文档解析与结构化方法',
-      '文档切分与分块策略',
-      '向量化技术与模型选择',
-      '向量数据库选型与对比',
-      '检索算法与召回机制',
-      '重排序与答案生成机制',
-      '多轮对话与上下文管理',
-      '用户权限与安全策略',
-      '数据更新与知识同步',
-      '系统集成与API设计',
-      '部署架构与运维管理',
-      '性能优化与监控',
-      '常见问题与解决方案',
-      '未来发展趋势与展望',
-      '项目实施流程与建议',
-      '用户培训与推广',
-      '附录与参考资料',
-      '互动问答回顾',
+      '智能客服应用案例效果对比',
+      '人力资源全场景应用效果',
+      '招聘与人才筛选应用数据',
+      '合规培训与数据分析应用',
+      '中型金融服务公司案例实操',
+      '知识库建设ROI效果对比',
+      'AI知识库平台发展趋势',
+      '金融机构知识库建设路径',
+      '技术选型与平台评估标准',
+      '人才培养与组织准备策略',
+      '数据安全与合规考量要点',
+      '实践建议与资源推荐',
+      '数据来源与参考文献',
     ];
     function createNavList(ul, closeOnClick) {
-      for(let i=1;i<=32;i++){
+      // 1-26页
+      for(let i=1;i<=26;i++){
         const li = document.createElement('li');
         const title = pageTitles[i] ? ` <span class='text-gray-400 text-sm'>${pageTitles[i]}</span>` : '';
-        li.innerHTML = `<button class="w-full text-left px-4 py-2 rounded hover:bg-gray-800 transition-colors" onclick="loadPage(${i});${closeOnClick ? 'closeMobileNav()' : ''}">第${i}页${title}</button>`;
+        li.innerHTML = `<button id="nav-btn-${i}" class="w-full text-left px-4 py-2 rounded hover:bg-gray-700 transition-colors" onclick="loadPage(${i});${closeOnClick ? 'closeMobileNav()' : ''}">第${i}页${title}</button>`;
         ul.appendChild(li);
       }
     }
@@ -94,7 +90,25 @@
     createNavList(document.querySelector('#mobileNav ul'), true);
     function loadPage(i) {
       document.getElementById('pageFrame').src = `page_${i}.html`;
+      // 保存当前页索引到localStorage
+      localStorage.setItem('currentPage', i);
+      // 移除所有导航按钮的选中样式
+      document.querySelectorAll('.page-list button, #mobileNav button').forEach(btn => {
+        btn.classList.remove('bg-gray-800', 'text-amber-400');
+      });
+      // 为当前选中的按钮添加选中样式
+      const currentBtn = document.getElementById(`nav-btn-${i}`);
+      if (currentBtn) {
+        currentBtn.classList.add('bg-gray-800', 'text-amber-400');
+      }
     }
+    // 页面加载时，从localStorage读取当前页索引，并高亮对应按钮
+    window.addEventListener('load', () => {
+      const currentPage = localStorage.getItem('currentPage');
+      if (currentPage) {
+        loadPage(parseInt(currentPage));
+      }
+    });
     // 移动端抽屉逻辑
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
