@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>互动问答回顾</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <div class="relative min-h-screen w-full bg-black text-white">
+    <!-- Header -->
+    <div class="relative z-10 pt-8 pb-6 px-16">
+      <div class="flex items-center mb-4">
+        <i class="fas fa-question-circle text-amber-400 text-3xl mr-4"></i>
+        <h1 class="text-4xl font-bold text-white">互动问答回顾</h1>
+      </div>
+      <div class="w-24 h-1 bg-gradient-to-r from-amber-400 to-blue-400"></div>
+    </div>
+    <!-- Main content: Quiz -->
+    <div class="relative z-10 px-16 py-8 max-w-3xl mx-auto">
+      <form id="quizForm" class="space-y-10">
+        <!-- Q1 -->
+        <div class="bg-gradient-to-r from-blue-900/40 to-blue-800/30 p-6 rounded-lg border border-blue-700/50">
+          <div class="mb-4 text-lg font-semibold text-blue-200 flex items-center"><i class="fas fa-lightbulb text-amber-400 mr-3"></i>1. RAG 技术的核心优势是什么？</div>
+          <div class="space-y-2">
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q1" value="A" class="form-radio text-amber-400" />
+              <span>仅能处理结构化数据</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q1" value="B" class="form-radio text-amber-400" />
+              <span>结合检索与生成，提升答案准确性</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q1" value="C" class="form-radio text-amber-400" />
+              <span>只依赖大模型推理</span>
+            </label>
+          </div>
+        </div>
+        <!-- Q2 -->
+        <div class="bg-gradient-to-r from-blue-900/40 to-blue-800/30 p-6 rounded-lg border border-blue-700/50">
+          <div class="mb-4 text-lg font-semibold text-blue-200 flex items-center"><i class="fas fa-lightbulb text-amber-400 mr-3"></i>2. 下列哪项属于有效提示词的构成要素？</div>
+          <div class="space-y-2">
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q2" value="A" class="form-radio text-amber-400" />
+              <span>明确指令</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q2" value="B" class="form-radio text-amber-400" />
+              <span>随机输入</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q2" value="C" class="form-radio text-amber-400" />
+              <span>忽略上下文</span>
+            </label>
+          </div>
+        </div>
+        <!-- Q3 -->
+        <div class="bg-gradient-to-r from-blue-900/40 to-blue-800/30 p-6 rounded-lg border border-blue-700/50">
+          <div class="mb-4 text-lg font-semibold text-blue-200 flex items-center"><i class="fas fa-lightbulb text-amber-400 mr-3"></i>3. 金融行业知识库建设的关键挑战不包括？</div>
+          <div class="space-y-2">
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q3" value="A" class="form-radio text-amber-400" />
+              <span>数据安全与合规</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q3" value="B" class="form-radio text-amber-400" />
+              <span>文档解析与切分</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q3" value="C" class="form-radio text-amber-400" />
+              <span>随意堆砌数据</span>
+            </label>
+          </div>
+        </div>
+        <!-- Q4 -->
+        <div class="bg-gradient-to-r from-blue-900/40 to-blue-800/30 p-6 rounded-lg border border-blue-700/50">
+          <div class="mb-4 text-lg font-semibold text-blue-200 flex items-center"><i class="fas fa-lightbulb text-amber-400 mr-3"></i>4. 以下哪项不是RAG技术的典型应用场景？</div>
+          <div class="space-y-2">
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q4" value="A" class="form-radio text-amber-400" />
+              <span>智能问答</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q4" value="B" class="form-radio text-amber-400" />
+              <span>知识检索</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q4" value="C" class="form-radio text-amber-400" />
+              <span>图片美颜</span>
+            </label>
+          </div>
+        </div>
+        <!-- Q5 -->
+        <div class="bg-gradient-to-r from-blue-900/40 to-blue-800/30 p-6 rounded-lg border border-blue-700/50">
+          <div class="mb-4 text-lg font-semibold text-blue-200 flex items-center"><i class="fas fa-lightbulb text-amber-400 mr-3"></i>5. 下列哪项不是提示词类型？</div>
+          <div class="space-y-2">
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q5" value="A" class="form-radio text-amber-400" />
+              <span>基础提示词</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q5" value="B" class="form-radio text-amber-400" />
+              <span>多步骤提示词</span>
+            </label>
+            <label class="flex items-center space-x-3">
+              <input type="radio" name="q5" value="C" class="form-radio text-amber-400" />
+              <span>随机提示词</span>
+            </label>
+          </div>
+        </div>
+        <div class="flex justify-center mt-8">
+          <button type="button" onclick="submitQuiz()" class="px-8 py-3 rounded-lg bg-amber-400 text-black font-bold text-lg hover:bg-amber-300 transition">提交答案</button>
+        </div>
+      </form>
+      <div id="quizResult" class="mt-8 text-center text-xl font-bold text-green-400 hidden"></div>
+    </div>
+    <!-- 右下角翻页按钮 -->
+    <div class="fixed bottom-8 right-8 z-50 flex space-x-4">
+      <a href="page_31.html" class="px-5 py-2 rounded-lg bg-gray-800 text-gray-200 border border-gray-600 hover:bg-gray-700 transition shadow-lg flex items-center">
+        <i class="fas fa-arrow-left mr-2"></i> 上一页
+      </a>
+      <a href="page_1.html" class="px-5 py-2 rounded-lg bg-amber-400 text-black border border-amber-400 hover:bg-amber-300 transition shadow-lg flex items-center">
+        返回首页 <i class="fas fa-home ml-2"></i>
+      </a>
+    </div>
+  </div>
+  <script>
+    function submitQuiz() {
+      const answers = ['B', 'A', 'C', 'C', 'C'];
+      let correct = 0;
+      for(let i=1;i<=5;i++){
+        const selected = document.querySelector(`input[name=q${i}]:checked`);
+        if(selected && selected.value === answers[i-1]) correct++;
+      }
+      const result = document.getElementById('quizResult');
+      result.classList.remove('hidden');
+      if(correct === 5) {
+        result.textContent = `🎉 恭喜你全部答对！`;
+      } else {
+        result.textContent = `你答对了 ${correct} / 5 题，欢迎回顾前面内容再试一次！`;
+      }
+    }
+  </script>
+</body>
+</html> 
