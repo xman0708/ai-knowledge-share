@@ -13,17 +13,30 @@
   </style>
 </head>
 <body class="min-h-screen w-full bg-black text-white flex flex-col">
-  <header class="w-full py-6 px-8 bg-black border-b border-gray-800 flex items-center justify-between">
+  <header class="w-full py-6 px-4 md:px-8 bg-black border-b border-gray-800 flex items-center justify-between">
     <div class="flex items-center">
       <i class="fas fa-robot text-amber-400 text-3xl mr-4"></i>
       <h1 class="text-2xl font-bold tracking-tight">AI 知识库平台 分享交流</h1>
     </div>
-    <span class="text-gray-400 text-sm">共31页</span>
+    <button id="menuBtn" class="block md:hidden text-2xl text-gray-400 focus:outline-none ml-4">
+      <i class="fas fa-bars"></i>
+    </button>
+    <span class="text-gray-400 text-sm hidden md:inline">共31页</span>
   </header>
   <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
-    <nav class="page-list w-full md:w-64 bg-black border-r border-gray-800 overflow-y-auto p-4" style="max-height:100vh;">
+    <!-- 移动端抽屉导航 -->
+    <nav id="mobileNav" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm p-4 transition-transform duration-300 transform -translate-x-full md:hidden" style="max-width:80vw;">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-lg font-bold text-white">目录</span>
+        <button id="closeNav" class="text-2xl text-gray-400"><i class="fas fa-times"></i></button>
+      </div>
       <ul class="space-y-2">
-        <!-- 页码导航 -->
+        <!-- JS自动生成 -->
+      </ul>
+    </nav>
+    <!-- 桌面端导航 -->
+    <nav class="page-list w-full md:w-64 bg-black border-r border-gray-800 overflow-y-auto p-4 hidden md:block" style="max-height:100vh;">
+      <ul class="space-y-2">
         <!-- JS自动生成 -->
       </ul>
     </nav>
@@ -65,17 +78,38 @@
       '项目实施流程与建议',
       '用户培训与推广',
       '附录与参考资料',
+      '互动问答回顾',
     ];
-    const ul = document.querySelector('.page-list ul');
-    for(let i=1;i<=31;i++){
-      const li = document.createElement('li');
-      const title = pageTitles[i] ? ` <span class='text-gray-400 text-sm'>${pageTitles[i]}</span>` : '';
-      li.innerHTML = `<button class="w-full text-left px-4 py-2 rounded hover:bg-gray-800 transition-colors" onclick="loadPage(${i})">第${i}页${title}</button>`;
-      ul.appendChild(li);
+    function createNavList(ul, closeOnClick) {
+      for(let i=1;i<=32;i++){
+        const li = document.createElement('li');
+        const title = pageTitles[i] ? ` <span class='text-gray-400 text-sm'>${pageTitles[i]}</span>` : '';
+        li.innerHTML = `<button class="w-full text-left px-4 py-2 rounded hover:bg-gray-800 transition-colors" onclick="loadPage(${i});${closeOnClick ? 'closeMobileNav()' : ''}">第${i}页${title}</button>`;
+        ul.appendChild(li);
+      }
     }
+    // 桌面端
+    createNavList(document.querySelector('.page-list ul'), false);
+    // 移动端
+    createNavList(document.querySelector('#mobileNav ul'), true);
     function loadPage(i) {
       document.getElementById('pageFrame').src = `page_${i}.html`;
     }
+    // 移动端抽屉逻辑
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const closeNav = document.getElementById('closeNav');
+    menuBtn && menuBtn.addEventListener('click', () => {
+      mobileNav.classList.remove('-translate-x-full');
+    });
+    closeNav && closeNav.addEventListener('click', closeMobileNav);
+    function closeMobileNav() {
+      mobileNav.classList.add('-translate-x-full');
+    }
+    // 点击遮罩关闭（可选）
+    mobileNav.addEventListener('click', function(e) {
+      if(e.target === mobileNav) closeMobileNav();
+    });
   </script>
 </body>
 </html> 
