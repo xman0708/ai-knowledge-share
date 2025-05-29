@@ -774,4 +774,41 @@
 <div class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-blue-900 via-amber-400 to-blue-900"></div>
 </div>
 
+<!-- 添加一个按钮来触发显示嵌入内容 -->
+<div class="flex justify-center my-8">
+    <button id="openFormBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        参与提示词优化互动
+    </button>
+</div>
+
+<!-- 用于嵌入 data-management.html 的 iframe -->
+<div id="interactiveSection" class="hidden mt-8 mx-auto max-w-4xl bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="flex justify-between items-center p-4 bg-gray-200">
+        <h2 class="text-xl font-semibold">提示词优化互动区</h2>
+        <button id="closeFormBtn" class="text-gray-600 hover:text-gray-900">&times;</button>
+    </div>
+    <iframe id="dataManagementFrame" src="data-management.html" frameborder="0" class="w-full" style="height: 600px;"></iframe>
+</div>
+
+<script>
+    const openBtn = document.getElementById('openFormBtn');
+    const closeBtn = document.getElementById('closeFormBtn');
+    const interactiveSection = document.getElementById('interactiveSection');
+    const iframeElement = document.getElementById('dataManagementFrame');
+
+    openBtn.addEventListener('click', () => {
+        interactiveSection.classList.remove('hidden');
+        // Optional: Scroll to the interactive section after showing it
+        interactiveSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        interactiveSection.classList.add('hidden');
+    });
+
+    // Optional: Adjust iframe height dynamically
+    // You might need to add logic here or in data-management.html
+    // to calculate the content height if it varies significantly.
+</script>
+
 </body></html>
