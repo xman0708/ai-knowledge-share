@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>合规培训提示词优化收集</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode.js@1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .qr-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .qr-code {
+            margin: 20px auto;
+            padding: 10px;
+            background: white;
+            display: inline-block;
+            border-radius: 4px;
+        }
+        .answers-list {
+            margin-top: 20px;
+        }
+        .answer-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            .qr-code {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>合规培训提示词优化收集</h1>
+        
+        <!-- 二维码展示区域 -->
+        <div class="qr-section">
+            <h2>扫描二维码参与优化</h2>
+            <div id="qrcode" class="qr-code"></div>
+            <p>扫描上方二维码，在手机上提交您的优化建议。</p>
+        </div>
+
+        <!-- 答案列表 -->
+        <div class="answers-list">
+            <h2>已收集的优化建议 (仅限当前浏览器和同源)</h2>
+            <button onclick="clearAnswers()" style="background-color: #ff9800; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; margin-bottom: 15px;">清空数据</button>
+            <div id="answersList"></div>
+        </div>
+    </div>
+
+    <script>
+        // 生成二维码
+        function generateQRCode() {
+            // 二维码指向填写页面 mobile-form.html
+            const formUrl = window.location.origin + '/mobile-form.html';
+            new QRCode(document.getElementById("qrcode"), {
+                text: formUrl,
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // 初始化数据并显示 (将读取 mobile-form.html 保存的数据)
+        function displayAnswers() {
+            // 注意：这里尝试读取 localStorage，但跨设备或跨浏览器无法直接共享
+            let answersList = JSON.parse(localStorage.getItem('promptAnswers')) || [];
+            const answersListElement = document.getElementById('answersList');
+            answersListElement.innerHTML = '';
+            
+            // 按时间倒序显示
+            answersList.reverse().forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'answer-item';
+                div.innerHTML = `
+                    <p><strong>优化建议：</strong>${item.improvedPrompt}</p>
+                    <p class="timestamp">提交时间：${item.timestamp}</p>
+                `;
+                answersListElement.appendChild(div);
+            });
+        }
+
+        // 显示消息 (保留，虽然提交功能移到另一页面)
+        function showMessage(message, type) {
+            // This function might not be used directly by this page anymore
+            // unless you add some mechanism to receive messages.
+            console.log(`Message: ${message} (${type})`);
+        }
+
+        // 清空数据
+        function clearAnswers() {
+            if (confirm('确定要清空所有收集到的优化建议吗？')) {
+                localStorage.removeItem('promptAnswers');
+                displayAnswers(); // 刷新显示，清空列表
+                showMessage('数据已清空！', 'success');
+            }
+        }
+
+        // 页面加载时初始化
+        window.onload = function() {
+            generateQRCode();
+            // 定时刷新显示，尝试读取 localStorage 的变化 (仅在同源下有限)
+            setInterval(displayAnswers, 3000); // 每3秒尝试刷新一次显示
+        };
+
+        // 初始显示数据
+        displayAnswers();
+    </script>
+</body>
+</html> 
